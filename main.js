@@ -11,15 +11,26 @@ function download(fileName, text){
   document.body.removeChild(element);
 }
 
-let participants_ul = document.querySelectorAll(".participants-item__display-name")
-
-let participants = ""
-participants_ul.forEach((i, index)=>{
-    if(index===0){
-        participants = participants + ""
-    }
-    else{
-        participants = participants + i.innerHTML + "\n";
-    }
-})
-download("hello", participants)
+var participants_ul = document.querySelectorAll(".participants-item__display-name")
+if(participants_ul === null || participants_ul === "" || participants_ul===undefined){
+    alert("Please Open the participations section!")
+}
+else{
+    let participants = ""
+    participants_ul.forEach((i, index)=>{
+        if(index===0){
+            participants += ""
+        }
+        else{
+            participants += i.innerHTML + "\n";
+        }
+    })
+    var dateMethod = new Date();
+    var date = dateMethod.getDate();
+    var month = dateMethod.getMonth();
+    var year = dateMethod.getFullYear();
+    var hours = dateMethod.getHours();
+    var minute = dateMethod.getMinutes();
+    var filename = date.toString()+month.toString()+year.toString()+ "_"+hours.toString()+minute.toString();
+    download(filename, participants)
+}
